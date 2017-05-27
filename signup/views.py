@@ -22,7 +22,7 @@ def register(request):
 			message = 'Thankyou'
 			subject = 'ThankYou'
 			finalForm.save();
-			fromMail = 'kuldeep@codenicely.in'
+			fromMail = 'pisdak79@gmail.com'
 			toMail = request.POST.get('email','')
 			try:
 				send_mail(subject,message,toMail,[fromMail])
