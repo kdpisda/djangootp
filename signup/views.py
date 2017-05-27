@@ -4,15 +4,19 @@ from .forms import RegisterForm, PartialRegisterForm
 from .models import User
 import random
 from django.core.mail import send_mail, BadHeaderError
+from django.core import mail
 
+connection = mail.get_connection()
 
 def index(request):
 	return HttpResponse("Hello World")
 
 def register(request):
+
 	if request.method == 'POST':
 		partialForm = PartialRegisterForm(request.POST)
 		if partialForm.is_valid():
+			connection.open()
 			finalForm = partialForm.save(commit = False)
 			finalForm.key = random.randint(9999,100000)
 			message = 'Thankyou'
@@ -23,6 +27,7 @@ def register(request):
 			try:
 				send_mail(subject,message,toMail,[fromMail])
 			except BadHeaderError:
+				connection.close()
 				return HttpResponse('Invalid header found.')
 			return HttpResponseRedirect('/signup/verify/')
 	else:

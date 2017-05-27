@@ -121,7 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/tmp/app-messages' # change this to a proper location
 
-EMAIL_HOST = 'http://kdpisda.pythonanywhere.com'
+EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025

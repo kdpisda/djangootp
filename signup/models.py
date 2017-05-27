@@ -10,8 +10,8 @@ class User(models.Model):
         (ACTIVE, 'Active'),
     )
 
-	name = models.CharField(max_length=20)
-	email = models.EmailField(max_length=20)
+	name = models.CharField(max_length=40)
+	email = models.EmailField(max_length=40)
 	contactNo = models.IntegerField()
 	status = models.CharField(
         max_length=2,
