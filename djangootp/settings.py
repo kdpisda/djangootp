@@ -25,7 +25,7 @@ SECRET_KEY = '6-6wmbbf(63qcw_89$2w^-2b4@gq6-l01!zzoybcehu+p8@#r5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['kdpisda.pythonanywhere.com']
+ALLOWED_HOSTS = ['kdpisda.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mydjango.wsgi.application'
+WSGI_APPLICATION = 'djangootp.wsgi.application'
 
 
 # Database
@@ -120,3 +120,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
