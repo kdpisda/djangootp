@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
-ROOT_URLCONF = 'mydjango.urls'
+ROOT_URLCONF = 'djangootp.urls'
 
 TEMPLATES = [
     {
