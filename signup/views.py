@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import RegisterForm, PartialRegisterForm
 from .models import User
 import random
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 
 
 def index(request):
@@ -15,14 +15,15 @@ def register(request):
 		if partialForm.is_valid():
 			finalForm = partialForm.save(commit = False)
 			finalForm.key = random.randint(9999,100000)
+			message = 'Thankyou'
+			subject = 'ThankYou'
 			finalForm.save();
-			send_mail(
-				'Thank you for registering',
-				'Thankyou for registering with us click the link below to confirm your identity.',
-				'kuldeep@codenicely.in',
-				[finalForm.email],
-				fail_silently=False,
-			)
+			fromMail = 'kuldeep@codenicely.in'
+			toMail = request.POST.get('email','')
+			try:
+				send_mail(subject,message,toMail,[fromMail])
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
 			return HttpResponseRedirect('/signup/verify/')
 	else:
 		form = PartialRegisterForm()

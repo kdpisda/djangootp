@@ -122,3 +122,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'http://kdpisda.pythonanywhere.com'
+EMAIL_PORT = 1025
