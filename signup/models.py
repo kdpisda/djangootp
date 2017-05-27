@@ -18,7 +18,7 @@ class User(models.Model):
         choices=ACCOUNT_STATUS,
         default=PENDING,
     )
-	key = models.PositiveSmallIntegerField(default=0)
+	key = models.CharField(max_length=5)
 	uniqueKey = models.UUIDField(unique = True, default=uuid.uuid4, editable=False)
 
 	def __str__(self):

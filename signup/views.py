@@ -19,7 +19,7 @@ def register(request):
 			connection.open()
 			finalForm = partialForm.save(commit = False)
 			finalForm.key = random.randint(9999,100000)
-			message = 'Thankyou'
+			message = finalForm.key
 			subject = 'ThankYou'
 			finalForm.save();
 			fromMail = 'pisdak79@gmail.com'
@@ -29,6 +29,7 @@ def register(request):
 			except BadHeaderError:
 				connection.close()
 				return HttpResponse('Invalid header found.')
+			connection.close()
 			return HttpResponseRedirect('/signup/verify/')
 	else:
 		form = PartialRegisterForm()
@@ -39,4 +40,16 @@ def thanks(request):
 	return HttpResponse('Thank You!')
 
 def verify(request):
-	return HttpResponse('verification pending!!')
+	req_uniqueKey = request.GET.get('uniqueKey','')
+	req_otp = request.GET.get('otp', '')
+	req_email = request.GET.get('email','')
+	db_obj = User.objects.get(email=req_email)
+	if db_obj.uniqueKey == req_uniqueKey:
+		if db_obj.otp == req_otp:
+			message = 'I found you!! :)'
+		else:
+			message = 'InValid Request!! :('
+	else:
+		message = 'InValid Request!! :('
+
+	return render(request, 'verify.html', {'message' : message})
