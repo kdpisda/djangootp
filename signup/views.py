@@ -20,12 +20,11 @@ def register(request):
 			connection.open()
 			finalForm = partialForm.save(commit = False)
 			finalForm.key = random.randint(9999,100000)
-			# url = '127.0.0.1:8000/signup/verify/?uniquekey='+
 			context = {'otp' : finalForm.key, 'uniqueKey':finalForm.uniqueKey, 'email':finalForm.email}
 			message = render_to_string('email.html', context = context).strip()
 			subject = 'Confirm your account'
 			finalForm.save();
-			fromMail = 'pisdak79@gmail.com'
+			fromMail = 'kdpisda@gmail.com'
 			toMail = request.POST.get('email','')
 			try:
 				send_mail(subject,message,toMail,[fromMail])
