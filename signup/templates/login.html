@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col s4"></div>
+    <div class="col s4">
+        <div class="card blue-grey darken-1">
+            <form action="/login/enterotp/" method="POST">
+                <div class="card-content white-text">
+                    <center>
+                        <span class="card-title">Please Login to see your dashboard</span>
+                    </center>
+                    <div class="row">
+                        <center>
+                            <div class="col s3"></div>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="col s3"></div>
+                        </center>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <center>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Submit
+                        </button>
+                    </center>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col s4"></div>
+</div>
+{% endblock %}
